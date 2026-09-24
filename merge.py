@@ -6,7 +6,7 @@ NAME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z\s'-]{1,49}$")
 PHONE_PATTERN = re.compile(r"^(0[7-9][01]\d{8}|\+234[7-9][01]\d{8})$")
 VALID_GENDERS = {"male", "female"}
 MIN_AGE = 0
-MAX_AGE = 90
+MAX_AGE = 120
 
 
 class Patient:
@@ -122,8 +122,13 @@ def list_patients():
         print(p)
 
 
+
 def find_patient():
     query = input("Search by name or MRN: ").strip().lower()
+    if not query:
+
+        return None
+
     matches = [
         p for p in patients
         if p.is_active and (query == p.mrn.lower() or query in p.name.lower())
@@ -134,6 +139,7 @@ def find_patient():
     for p in matches:
         print(p)
     return matches
+
 
 
 def update_phone():
